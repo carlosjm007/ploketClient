@@ -62,7 +62,10 @@ public class Hero : MonoBehaviour {
 		if(info_base.heros.ContainsKey(id) && !info_base.juego_iniciado){
 			ubi = info_base.heros[id];
 		}
-
+		/*
+		//////////////////////////////
+		//// Aquí se descibe el control de hero dependiendo del dispositivo
+		/// Este es un ejemplo para pc:
 		if(Input.GetKey(KeyCode.LeftArrow)){
 			transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
 			ubi.angulo = ubi.angulo + speed*Time.deltaTime;
@@ -83,7 +86,7 @@ public class Hero : MonoBehaviour {
 				ubi.magnitud = min_magnitude;
 			}
 		}
-
+		*/
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
 			ubi.reloj = info_base.m_reloj;
 			json_bytes = JsonUtility.ToJson(ubi);
