@@ -87,6 +87,28 @@ public class Hero : MonoBehaviour {
 			}
 		}
 		*/
+
+		if(Input.GetKey(KeyCode.LeftArrow)){
+			transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			ubi.angulo = ubi.angulo + speed*Time.deltaTime;
+		}
+		if(Input.GetKey(KeyCode.RightArrow)){
+			transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			ubi.angulo = ubi.angulo - speed*Time.deltaTime;
+		}
+		if(Input.GetKey(KeyCode.UpArrow)){
+			ubi.magnitud = ubi.magnitud + speed*Time.deltaTime/2;
+			if(ubi.magnitud > max_magnitude){
+				ubi.magnitud = max_magnitude;
+			}
+		}
+		if(Input.GetKey(KeyCode.DownArrow)){
+			ubi.magnitud = ubi.magnitud - speed*Time.deltaTime/2;
+			if(ubi.magnitud < min_magnitude){
+				ubi.magnitud = min_magnitude;
+			}
+		}
+
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
 			ubi.reloj = info_base.m_reloj;
 			json_bytes = JsonUtility.ToJson(ubi);
