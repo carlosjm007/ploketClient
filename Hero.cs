@@ -89,6 +89,18 @@ public class Hero : MonoBehaviour {
 			}
 		}
 		*/
+
+		if(info_base.dispositivo.android){
+			ubi.magnitud = ubi.magnitud + speed*Time.deltaTime/2*joystick.Vertical;
+			ubi.angulo = ubi.angulo - speed*Time.deltaTime*joystick.Horizontal;
+			if(ubi.magnitud < min_magnitude){
+				ubi.magnitud = min_magnitude;
+			}
+			if(ubi.magnitud > max_magnitude){
+				ubi.magnitud = max_magnitude;
+			}
+		}
+
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
 			ubi.reloj = info_base.m_reloj;
 			json_bytes = JsonUtility.ToJson(ubi);

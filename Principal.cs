@@ -20,11 +20,15 @@ public class Principal : MonoBehaviour {
 	float m_duracion = 2.0f;
 	public GameObject m_enemy;
 	public GameObject planeta;
+	public GameObject control_touch;
 	private Dictionary<string, GameObject> instancia_enemy = new Dictionary<string, GameObject>();
-	Configuracion dispositivo = new Configuracion();
+	public Configuracion dispositivo = new Configuracion();
 	// Use this for initialization
 	void Start () {
 		conect_server();
+		if(dispositivo.android){
+			control_touch.SetActive(true);
+		}
 	}
 	
 	// Update is called once per frame
