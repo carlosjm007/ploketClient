@@ -88,21 +88,21 @@ public class Hero : MonoBehaviour {
 		}
 		*/
 
-		if(Input.GetKey(KeyCode.LeftArrow)){
+		if(Input.GetKey(KeyCode.LeftArrow) && info_base.dispositivo.pc){
 			transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
 			ubi.angulo = ubi.angulo + speed*Time.deltaTime;
 		}
-		if(Input.GetKey(KeyCode.RightArrow)){
+		if(Input.GetKey(KeyCode.RightArrow) && info_base.dispositivo.pc){
 			transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
 			ubi.angulo = ubi.angulo - speed*Time.deltaTime;
 		}
-		if(Input.GetKey(KeyCode.UpArrow)){
+		if(Input.GetKey(KeyCode.UpArrow) && info_base.dispositivo.pc){
 			ubi.magnitud = ubi.magnitud + speed*Time.deltaTime/2;
 			if(ubi.magnitud > max_magnitude){
 				ubi.magnitud = max_magnitude;
 			}
 		}
-		if(Input.GetKey(KeyCode.DownArrow)){
+		if(Input.GetKey(KeyCode.DownArrow) && info_base.dispositivo.pc){
 			ubi.magnitud = ubi.magnitud - speed*Time.deltaTime/2;
 			if(ubi.magnitud < min_magnitude){
 				ubi.magnitud = min_magnitude;
