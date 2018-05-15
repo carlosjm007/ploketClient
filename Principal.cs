@@ -20,8 +20,8 @@ public class Principal : MonoBehaviour {
 	float m_duracion = 2.0f;
 	public GameObject m_enemy;
 	public GameObject planeta;
-	//private List<GameObject> instancia_enemy = new List<GameObject>();
 	private Dictionary<string, GameObject> instancia_enemy = new Dictionary<string, GameObject>();
+	Configuracion dispositivo = new Configuracion();
 	// Use this for initialization
 	void Start () {
 		conect_server();
