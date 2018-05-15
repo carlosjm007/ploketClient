@@ -23,6 +23,8 @@ public class Hero : MonoBehaviour {
 	private float delta_angulo;
 	private float delta_magnitud;
 	private ubicacion ubicacion_paso = new ubicacion();
+    public Joystick joystick;
+    
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		id = info.id;
