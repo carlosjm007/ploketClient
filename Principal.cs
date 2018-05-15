@@ -21,7 +21,7 @@ public class Principal : MonoBehaviour {
 	public GameObject m_enemy;
 	public GameObject planeta;
 	private Dictionary<string, GameObject> instancia_enemy = new Dictionary<string, GameObject>();
-	Configuracion dispositivo = new Configuracion();
+	public Configuracion dispositivo = new Configuracion();
 	// Use this for initialization
 	void Start () {
 		conect_server();
