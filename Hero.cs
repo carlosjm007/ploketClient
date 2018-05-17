@@ -110,6 +110,7 @@ public class Hero : MonoBehaviour {
 
 		if(Input.GetKey(KeyCode.Space) && tiempo_transcurrido_disparo>tiempo_espera_disparo && !ubi.disparo){
 			ubi.disparo = true;
+			tiempo_transcurrido_disparo = 0.0f;
 		}
 		*/
 
