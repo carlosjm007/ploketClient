@@ -111,6 +111,7 @@ public class Hero : MonoBehaviour {
 			byte[] bytes = Encoding.ASCII.GetBytes(json_bytes);
 			info_base._websocket.Send(bytes);
 			tiempo_transcurrido = 0.0f;
+			ubi.disparo = false;
 		}
 	}
 
