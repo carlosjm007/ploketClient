@@ -7,6 +7,7 @@ public class Bala : MonoBehaviour {
 	private const float tiempo_desplazamiento_disparo = 3.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
 	private const float speed = 10.0f;
+	public ubicacion ubi = new ubicacion();
 	// Use this for initialization
 	void Start () {
 		
@@ -15,9 +16,9 @@ public class Bala : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		tiempo_transcurrido_disparo = tiempo_transcurrido_disparo + Time.deltaTime;
-        transform.Translate(Vector3.right * Time.deltaTime*speed);
-        if (tiempo_transcurrido_disparo>tiempo_desplazamiento_disparo){
+		transform.Translate(Vector3.right * Time.deltaTime*speed);
+		if (tiempo_transcurrido_disparo>tiempo_desplazamiento_disparo){
 			Destroy(gameObject);
-        }
+		}
 	}
 }
