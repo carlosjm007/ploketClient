@@ -27,6 +27,7 @@ public class Hero : MonoBehaviour {
     private bool disparo = false;
 	private const float tiempo_espera_disparo = 1.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
+	public GameObject m_enemy;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
