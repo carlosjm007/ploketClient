@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
 	private float delta_magnitud;
 	private float tiempo_paso = 0.0f;
 	private int cuenta = 0;
+	public GameObject bala;
 	// Use this for initialization
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();

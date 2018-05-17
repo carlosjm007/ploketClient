@@ -13,6 +13,9 @@ public class ubicacion
 	public float angulo;
 	public float magnitud;
 	public float reloj;
+	public bool disparo;
+	public bool direccion;	//Dirección del disparo. true: derecha, false: izquierda.
+	public float reloj_disparo;
 }
 
 [System.Serializable]

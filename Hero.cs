@@ -24,6 +24,10 @@ public class Hero : MonoBehaviour {
 	private float delta_magnitud;
 	private ubicacion ubicacion_paso = new ubicacion();
     public Joystick joystick;
+    private bool disparo = false;
+	private const float tiempo_espera_disparo = 1.5f;
+	private float tiempo_transcurrido_disparo = 0.0f;
+	public GameObject m_bala;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
@@ -34,12 +38,18 @@ public class Hero : MonoBehaviour {
 	void Update () {
 		tiempo_transcurrido = tiempo_transcurrido + Time.deltaTime;
 		tiempo_paso = tiempo_paso + Time.deltaTime;
+		tiempo_transcurrido_disparo = tiempo_transcurrido_disparo + Time.deltaTime;
 		Principal info_base = principal.GetComponent<Principal>();
 
 		if(info_base.heros.ContainsKey(id) && info_base.juego_iniciado && info_base.heros[id].reloj <= ubi.reloj){
 			delta_angulo = (ubi.angulo - info_base.heros[id].angulo)*0.25f;
 			delta_magnitud = (ubi.magnitud - info_base.heros[id].magnitud)*0.25f;
 			ubicacion_paso = info_base.heros[id];
+			if(ubicacion_paso.direccion){
+				transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			}else{
+				transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			}
 		}
 
 		if(tiempo_paso > 0.025f && info_base.juego_iniciado){
@@ -59,6 +69,15 @@ public class Hero : MonoBehaviour {
 
 			m_camaraPrincipal.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 			m_camaraPrincipal.transform.rotation = transform.rotation;
+			if(ubicacion_paso.disparo){
+				tiempo_transcurrido_disparo = 0.0f;
+				ubicacion_paso.disparo = false;
+				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
+				Bala id_m_bala = bala.GetComponent<Bala>();
+				id_m_bala.ubi = info_base.heros[id];
+				id_m_bala.empieza = true;
+			}
+
 		}
 
 		if(info_base.heros.ContainsKey(id) && !info_base.juego_iniciado){
@@ -69,11 +88,11 @@ public class Hero : MonoBehaviour {
 		//// Aquí se descibe el control de hero dependiendo del dispositivo
 		/// Este es un ejemplo para pc:
 		if(Input.GetKey(KeyCode.LeftArrow)){
-			transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			ubi.direccion = false;
 			ubi.angulo = ubi.angulo + speed*Time.deltaTime;
 		}
 		if(Input.GetKey(KeyCode.RightArrow)){
-			transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			ubi.direccion = true;
 			ubi.angulo = ubi.angulo - speed*Time.deltaTime;
 		}
 		if(Input.GetKey(KeyCode.UpArrow)){
@@ -87,6 +106,11 @@ public class Hero : MonoBehaviour {
 			if(ubi.magnitud < min_magnitude){
 				ubi.magnitud = min_magnitude;
 			}
+		}
+
+		if(Input.GetKey(KeyCode.Space) && tiempo_transcurrido_disparo>tiempo_espera_disparo && !ubi.disparo){
+			ubi.disparo = true;
+			tiempo_transcurrido_disparo = 0.0f;
 		}
 		*/
 
@@ -107,6 +131,7 @@ public class Hero : MonoBehaviour {
 			byte[] bytes = Encoding.ASCII.GetBytes(json_bytes);
 			info_base._websocket.Send(bytes);
 			tiempo_transcurrido = 0.0f;
+			ubi.disparo = false;
 		}
 	}
 
