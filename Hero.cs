@@ -44,6 +44,11 @@ public class Hero : MonoBehaviour {
 			delta_angulo = (ubi.angulo - info_base.heros[id].angulo)*0.25f;
 			delta_magnitud = (ubi.magnitud - info_base.heros[id].magnitud)*0.25f;
 			ubicacion_paso = info_base.heros[id];
+			if(ubicacion_paso.direccion){
+				transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			}else{
+				transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			}
 		}
 
 		if(tiempo_paso > 0.025f && info_base.juego_iniciado){
@@ -80,11 +85,11 @@ public class Hero : MonoBehaviour {
 		//// Aquí se descibe el control de hero dependiendo del dispositivo
 		/// Este es un ejemplo para pc:
 		if(Input.GetKey(KeyCode.LeftArrow)){
-			transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			ubi.direccion = false;
 			ubi.angulo = ubi.angulo + speed*Time.deltaTime;
 		}
 		if(Input.GetKey(KeyCode.RightArrow)){
-			transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			ubi.direccion = true;
 			ubi.angulo = ubi.angulo - speed*Time.deltaTime;
 		}
 		if(Input.GetKey(KeyCode.UpArrow)){
