@@ -13,6 +13,8 @@ public class ubicacion
 	public float angulo;
 	public float magnitud;
 	public float reloj;
+	public bool disparo;
+	public float reloj_disparo;
 }
 
 [System.Serializable]
