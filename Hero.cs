@@ -27,7 +27,7 @@ public class Hero : MonoBehaviour {
     private bool disparo = false;
 	private const float tiempo_espera_disparo = 1.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
-	public GameObject bala;
+	public GameObject m_bala;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
@@ -72,6 +72,7 @@ public class Hero : MonoBehaviour {
 			if(ubicacion_paso.disparo){
 				tiempo_transcurrido_disparo = 0.0f;
 				ubicacion_paso.disparo = false;
+				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
 				///////////////////////////////
 				// Aquí se crea la instancia del disparo
 			}
