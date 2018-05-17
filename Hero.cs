@@ -73,8 +73,8 @@ public class Hero : MonoBehaviour {
 				tiempo_transcurrido_disparo = 0.0f;
 				ubicacion_paso.disparo = false;
 				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
-				///////////////////////////////
-				// Aquí se crea la instancia del disparo
+				Bala id_m_bala = bala.GetComponent<Bala>();
+				bala.ubi = info_base.heros[id];
 				Debug.Log("Dispara perro");
 			}
 
