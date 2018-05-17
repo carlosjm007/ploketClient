@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
 
@@ -24,6 +25,7 @@ public class Hero : MonoBehaviour {
 	private float delta_magnitud;
 	private ubicacion ubicacion_paso = new ubicacion();
     public Joystick joystick;
+    public Button boton_disparo;
     private bool disparo = false;
 	private const float tiempo_espera_disparo = 1.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
