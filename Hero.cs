@@ -24,13 +24,13 @@ public class Hero : MonoBehaviour {
 	private float delta_magnitud;
 	private ubicacion ubicacion_paso = new ubicacion();
     public Joystick joystick;
-    private bool disparo = false;
 	private const float tiempo_espera_disparo = 1.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		id = info.id;
+		ubi.disparo = false;
 	}
 
 	// Update is called once per frame
@@ -68,6 +68,7 @@ public class Hero : MonoBehaviour {
 				ubicacion_paso.disparo = false;
 				///////////////////////////////
 				// Aquí se crea la instancia del disparo
+				Debug.Log("Dispara perro");
 			}
 
 		}
@@ -124,6 +125,11 @@ public class Hero : MonoBehaviour {
 			if(ubi.magnitud < min_magnitude){
 				ubi.magnitud = min_magnitude;
 			}
+		}
+
+		if(Input.GetKey(KeyCode.Space) && tiempo_transcurrido_disparo>tiempo_espera_disparo && !ubi.disparo){
+			ubi.disparo = true;
+			tiempo_transcurrido_disparo = 0.0f;
 		}
 
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
