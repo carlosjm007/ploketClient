@@ -24,6 +24,9 @@ public class Hero : MonoBehaviour {
 	private float delta_magnitud;
 	private ubicacion ubicacion_paso = new ubicacion();
     public Joystick joystick;
+    private bool disparo = false;
+	private const float tiempo_espera_disparo = 1.5f;
+	private float tiempo_transcurrido_disparo = 0.0f;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
@@ -34,6 +37,7 @@ public class Hero : MonoBehaviour {
 	void Update () {
 		tiempo_transcurrido = tiempo_transcurrido + Time.deltaTime;
 		tiempo_paso = tiempo_paso + Time.deltaTime;
+		tiempo_transcurrido_disparo = tiempo_transcurrido_disparo + Time.deltaTime;
 		Principal info_base = principal.GetComponent<Principal>();
 
 		if(info_base.heros.ContainsKey(id) && info_base.juego_iniciado && info_base.heros[id].reloj <= ubi.reloj){
@@ -59,6 +63,13 @@ public class Hero : MonoBehaviour {
 
 			m_camaraPrincipal.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 			m_camaraPrincipal.transform.rotation = transform.rotation;
+			if(ubicacion_paso.disparo){
+				tiempo_transcurrido_disparo = 0.0f;
+				ubicacion_paso.disparo = false;
+				///////////////////////////////
+				// Aquí se crea la instancia del disparo
+			}
+
 		}
 
 		if(info_base.heros.ContainsKey(id) && !info_base.juego_iniciado){
@@ -88,7 +99,12 @@ public class Hero : MonoBehaviour {
 				ubi.magnitud = min_magnitude;
 			}
 		}
+
+		if(Input.GetKey(KeyCode.Space) && tiempo_transcurrido_disparo<tiempo_espera_disparo && !ubi.disparo){
+			ubi.disparo = true;
+		}
 		*/
+
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
 			ubi.reloj = info_base.m_reloj;
 			json_bytes = JsonUtility.ToJson(ubi);
