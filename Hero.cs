@@ -75,6 +75,7 @@ public class Hero : MonoBehaviour {
 				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
 				Bala id_m_bala = bala.GetComponent<Bala>();
 				id_m_bala.ubi = info_base.heros[id];
+				id_m_bala.empieza = true;
 			}
 
 		}
