@@ -24,7 +24,7 @@ public class Hero : MonoBehaviour {
 	private float delta_magnitud;
 	private ubicacion ubicacion_paso = new ubicacion();
     public Joystick joystick;
-	private const float tiempo_espera_disparo = 1.5f;
+	private const float tiempo_espera_disparo = 2.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
     
 	void Start () {
@@ -112,11 +112,11 @@ public class Hero : MonoBehaviour {
 		*/
 
 		if(Input.GetKey(KeyCode.LeftArrow) && info_base.dispositivo.pc){
-			transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			ubi.direccion = false;
 			ubi.angulo = ubi.angulo + speed*Time.deltaTime;
 		}
 		if(Input.GetKey(KeyCode.RightArrow) && info_base.dispositivo.pc){
-			transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			ubi.direccion = true;
 			ubi.angulo = ubi.angulo - speed*Time.deltaTime;
 		}
 		if(Input.GetKey(KeyCode.UpArrow) && info_base.dispositivo.pc){
