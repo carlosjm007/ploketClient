@@ -75,7 +75,7 @@ public class Hero : MonoBehaviour {
 				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
 				Bala id_m_bala = bala.GetComponent<Bala>();
 				id_m_bala.ubi = info_base.heros[id];
-				Debug.Log("Dispara perro");
+				id_m_bala.empieza = true;
 			}
 
 		}
@@ -110,6 +110,7 @@ public class Hero : MonoBehaviour {
 
 		if(Input.GetKey(KeyCode.Space) && tiempo_transcurrido_disparo>tiempo_espera_disparo && !ubi.disparo){
 			ubi.disparo = true;
+			tiempo_transcurrido_disparo = 0.0f;
 		}
 		*/
 
