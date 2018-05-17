@@ -26,7 +26,7 @@ public class Hero : MonoBehaviour {
     public Joystick joystick;
 	private const float tiempo_espera_disparo = 2.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
-	public GameObject m_enemy;
+	public GameObject bala;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
