@@ -117,7 +117,7 @@ public class Hero : MonoBehaviour {
 		}
 		*/
 
-		if(info_base.dispositivo.android){
+		if(info_base.dispositivo.android && info_base.juego_iniciado){
 			ubi.magnitud = ubi.magnitud + speed*Time.deltaTime/2*joystick.Vertical;
 			ubi.angulo = ubi.angulo - speed*Time.deltaTime*joystick.Horizontal;
 			if(ubi.magnitud < min_magnitude){
@@ -125,6 +125,12 @@ public class Hero : MonoBehaviour {
 			}
 			if(ubi.magnitud > max_magnitude){
 				ubi.magnitud = max_magnitude;
+			}
+			if(joystick.Horizontal < 0){
+				ubi.direccion = false;
+			}
+			if(joystick.Horizontal > 0){
+				ubi.direccion = true;
 			}
 		}
 
