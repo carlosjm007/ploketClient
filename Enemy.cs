@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
 	private float delta_magnitud;
 	private float tiempo_paso = 0.0f;
 	private int cuenta = 0;
-	public GameObject bala;
+	public GameObject m_bala;
 	// Use this for initialization
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
@@ -53,6 +53,14 @@ public class Enemy : MonoBehaviour {
 			transform.position = new Vector3(x, y, -0.5f);
 			if(delta_angulo < 0)transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
 			if(delta_angulo > 0)transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			if(ubicacion_paso.disparo){
+				ubicacion_paso.disparo = false;
+				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
+				Bala id_m_bala = bala.GetComponent<Bala>();
+				id_m_bala.ubi = info_base.heros[id];
+				id_m_bala.empieza = true;
+				id_m_bala.dueno = false;
+			}
 		}
 
 		float angle = (planeta.transform.position.x < transform.position.x)?

@@ -10,6 +10,7 @@ public class Bala : MonoBehaviour {
 	public ubicacion ubi = new ubicacion();
 	public bool empieza = false;
 	private bool define_ubicacion = true;
+	public bool dueno; // true: disparado por hero, false: disparado por enemy
 	// Use this for initialization
 	void Start () {
 		
@@ -31,6 +32,17 @@ public class Bala : MonoBehaviour {
 			if (tiempo_transcurrido_disparo>tiempo_desplazamiento_disparo){
 				Destroy(gameObject);
 			}
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		if(collision.gameObject.tag == "enemy" && dueno){
+			Debug.Log("enemy");
+			Destroy(gameObject);
+		}
+		if(collision.gameObject.tag == "hero" && !dueno){
+			Debug.Log("hero");
+			Destroy(gameObject);
 		}
 	}
 }
