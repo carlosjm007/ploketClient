@@ -44,5 +44,9 @@ public class Bala : MonoBehaviour {
 			Debug.Log("hero");
 			Destroy(gameObject);
 		}
+		if(collision.gameObject.tag == "enemy" && !dueno){
+			Debug.Log("enemy");
+			Destroy(gameObject);
+		}
 	}
 }
