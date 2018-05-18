@@ -79,6 +79,7 @@ public class Hero : MonoBehaviour {
 				Bala id_m_bala = bala.GetComponent<Bala>();
 				id_m_bala.ubi = info_base.heros[id];
 				id_m_bala.empieza = true;
+				id_m_bala.dueno = true;
 			}
 
 		}

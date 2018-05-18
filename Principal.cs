@@ -23,6 +23,7 @@ public class Principal : MonoBehaviour {
 	public GameObject control_touch;
 	private Dictionary<string, GameObject> instancia_enemy = new Dictionary<string, GameObject>();
 	public Configuracion dispositivo = new Configuracion();
+	public GameObject m_bala;
 	// Use this for initialization
 	void Start () {
 		conect_server();
@@ -45,6 +46,7 @@ public class Principal : MonoBehaviour {
 					id_m_enemy.principal = gameObject;
 					id_m_enemy.planeta = planeta;
 					id_m_enemy.ubi = entry.Value;
+					id_m_enemy.m_bala = m_bala;
 				}
 			}
 		}
