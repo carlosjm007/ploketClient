@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Hero : MonoBehaviour {
 
