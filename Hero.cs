@@ -127,6 +127,11 @@ public class Hero : MonoBehaviour {
 			}
 		}
 
+		if(disparo && tiempo_transcurrido_disparo>tiempo_espera_disparo && !ubi.disparo){
+			ubi.disparo = true;
+			tiempo_transcurrido_disparo = 0.0f;
+		}
+
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
 			ubi.reloj = info_base.m_reloj;
 			json_bytes = JsonUtility.ToJson(ubi);
@@ -138,5 +143,11 @@ public class Hero : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
+	}
+	public void up(BaseEventData e){
+		disparo = false;
+	}
+	public void down(BaseEventData e){
+		disparo = true;
 	}
 }
