@@ -12,6 +12,7 @@ public class Bala : MonoBehaviour {
 	private bool define_ubicacion = true;
 	public bool dueno; // true: disparado por hero, false: disparado por enemy
 	public string id_dueno;
+	public GameObject principal;
 	// Use this for initialization
 	void Start () {
 		
@@ -42,6 +43,8 @@ public class Bala : MonoBehaviour {
 			if(golpeado.id != id_dueno){
 				Destroy(gameObject);
 				if(dueno){
+					Principal info_base = principal.GetComponent<Principal>();
+					info_base._websocket.Send("wefwfwef");
 					Debug.Log("Le disparaste a tu enemigo");
 					////////
 					// Aquí se notifica al servidor
