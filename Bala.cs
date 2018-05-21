@@ -11,6 +11,7 @@ public class Bala : MonoBehaviour {
 	public bool empieza = false;
 	private bool define_ubicacion = true;
 	public bool dueno; // true: disparado por hero, false: disparado por enemy
+	public string id_dueno;
 	// Use this for initialization
 	void Start () {
 		
@@ -36,16 +37,19 @@ public class Bala : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if(collision.gameObject.tag == "enemy" && dueno){
-			Debug.Log("enemy");
-			Destroy(gameObject);
+		if(collision.gameObject.tag == "enemy"){
+			Enemy golpeado = collision.gameObject.GetComponent<Enemy>();
+			if(golpeado.id != id_dueno){
+				Destroy(gameObject);
+				if(dueno){
+					Debug.Log("Le disparaste a tu enemigo");
+					////////
+					// Aquí se notifica al servidor
+				}
+			}
 		}
 		if(collision.gameObject.tag == "hero" && !dueno){
-			Debug.Log("hero");
-			Destroy(gameObject);
-		}
-		if(collision.gameObject.tag == "enemy" && !dueno){
-			Debug.Log("enemy");
+			Debug.Log("Te dispararon :'(");
 			Destroy(gameObject);
 		}
 	}
