@@ -80,6 +80,7 @@ public class Hero : MonoBehaviour {
 				id_m_bala.ubi = info_base.heros[id];
 				id_m_bala.empieza = true;
 				id_m_bala.dueno = true;
+				id_m_bala.id_dueno = id;
 			}
 
 		}
