@@ -13,6 +13,8 @@ public class Bala : MonoBehaviour {
 	public bool dueno; // true: disparado por hero, false: disparado por enemy
 	public string id_dueno;
 	public GameObject principal;
+	public disparado info_disparo;
+	private string json_bytes;
 	// Use this for initialization
 	void Start () {
 		
@@ -44,7 +46,10 @@ public class Bala : MonoBehaviour {
 				Destroy(gameObject);
 				if(dueno){
 					Principal info_base = principal.GetComponent<Principal>();
-					info_base._websocket.Send("wefwfwef");
+					info_disparo.id_disparado = golpeado.id;
+					info_disparo.id_autor = id_dueno;
+					json_bytes = JsonUtility.ToJson(info_disparo);
+					info_base._websocket.Send(json_bytes);
 					Debug.Log("Le disparaste a tu enemigo");
 					////////
 					// Aquí se notifica al servidor

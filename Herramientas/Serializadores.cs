@@ -19,6 +19,13 @@ public class ubicacion
 }
 
 [System.Serializable]
+public class disparado
+{
+	public string id_disparado;
+	public string id_autor;
+}
+
+[System.Serializable]
 public class server
 {
 	public string id;
