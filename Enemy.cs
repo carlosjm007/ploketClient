@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour {
 			if(info_base.heros[id].reloj_disparo > tiempo_espera_disparo){
 				indicador_disparo.transform.localScale = new Vector3(0.9f, 0.8f, 1.0f);
 			}else{
-				Debug.Log(info_base.heros[id].reloj_disparo);
 				indicador_disparo.transform.localScale = new Vector3(info_base.heros[id].reloj_disparo*0.9f/tiempo_espera_disparo, 0.8f, 1.0f);
 			}
 		}
@@ -60,8 +59,8 @@ public class Enemy : MonoBehaviour {
 			y = Mathf.Cos(ubicacion_paso.angulo*Mathf.PI/180) * ubicacion_paso.magnitud;
 			x = -Mathf.Sin(ubicacion_paso.angulo*Mathf.PI/180) * ubicacion_paso.magnitud;
 			transform.position = new Vector3(x, y, -0.5f);
-			if(delta_angulo < 0)transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
-			if(delta_angulo > 0)transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+			if(!ubicacion_paso.direccion)transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+			if(ubicacion_paso.direccion)transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
 			if(ubicacion_paso.disparo){
 				ubicacion_paso.disparo = false;
 				GameObject bala = Instantiate(m_bala, transform.position, Quaternion.identity) as GameObject;
