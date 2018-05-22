@@ -17,10 +17,13 @@ public class Enemy : MonoBehaviour {
 	private float tiempo_paso = 0.0f;
 	private int cuenta = 0;
 	public GameObject m_bala;
+	public GameObject indicador_disparo;
+	private const float tiempo_espera_disparo = 2.5f;
 	// Use this for initialization
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		principal = GameObject.Find("Principal");
+		indicador_disparo = transform.Find("barra/indicador").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -34,6 +37,12 @@ public class Enemy : MonoBehaviour {
 			delta_magnitud = (ubi.magnitud - info_base.heros[id].magnitud)*0.25f;
 			ubi = info_base.heros[id];
 			cuenta = 0;
+			if(info_base.heros[id].reloj_disparo > tiempo_espera_disparo){
+				indicador_disparo.transform.localScale = new Vector3(0.9f, 0.8f, 1.0f);
+			}else{
+				Debug.Log(info_base.heros[id].reloj_disparo);
+				indicador_disparo.transform.localScale = new Vector3(info_base.heros[id].reloj_disparo*0.9f/tiempo_espera_disparo, 0.8f, 1.0f);
+			}
 		}
 
 		if(tiempo_paso > 0.025f && info_base.juego_iniciado && cuenta < 3){
