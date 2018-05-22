@@ -129,6 +129,7 @@ public class Hero : MonoBehaviour {
 
 		if(tiempo_transcurrido > tiempo_espera && info_base.juego_iniciado){
 			ubi.reloj = info_base.m_reloj;
+			ubi.reloj_disparo = tiempo_transcurrido_disparo;
 			json_bytes = JsonUtility.ToJson(ubi);
 			byte[] bytes = Encoding.ASCII.GetBytes(json_bytes);
 			info_base._websocket.Send(bytes);
