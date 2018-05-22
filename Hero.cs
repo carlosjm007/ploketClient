@@ -31,10 +31,12 @@ public class Hero : MonoBehaviour {
 	private const float tiempo_espera_disparo = 1.5f;
 	private float tiempo_transcurrido_disparo = 0.0f;
 	public GameObject m_bala;
+	public GameObject indicador_disparo;
     
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		id = info.id;
+		indicador_disparo = transform.Find("barra/indicador").gameObject;
 	}
 
 	// Update is called once per frame
@@ -48,6 +50,11 @@ public class Hero : MonoBehaviour {
 			delta_angulo = (ubi.angulo - info_base.heros[id].angulo)*0.25f;
 			delta_magnitud = (ubi.magnitud - info_base.heros[id].magnitud)*0.25f;
 			ubicacion_paso = info_base.heros[id];
+			if(info_base.heros[id].reloj_disparo > tiempo_espera_disparo){
+				indicador_disparo.transform.localScale = new Vector3(0.9f, 0.8f, 1.0f);
+			}else{
+				indicador_disparo.transform.localScale = new Vector3(info_base.heros[id].reloj_disparo*0.9f/tiempo_espera_disparo, 0.8f, 1.0f);
+			}
 			if(ubicacion_paso.direccion){
 				transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
 			}else{
