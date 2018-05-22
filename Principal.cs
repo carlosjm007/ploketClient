@@ -23,6 +23,7 @@ public class Principal : MonoBehaviour {
 	private Dictionary<string, GameObject> instancia_enemy = new Dictionary<string, GameObject>();
 	public Configuracion dispositivo = new Configuracion();
 	public GameObject m_bala;
+	public disparado info_disparado;
 	// Use this for initialization
 	void Start () {
 		conect_server();
@@ -60,21 +61,22 @@ public class Principal : MonoBehaviour {
 
 		socket.OnMessage += (sender, e) => {
 			if (e.IsText) {
-				ubicacion_hero = JsonUtility.FromJson<ubicacion>(e.Data);
+				info_disparado = JsonUtility.FromJson<disparado>(e.Data);
+				Debug.Log(info_disparado.id_disparado);
 			}else{				
 				string texto = Encoding.ASCII.GetString(e.RawData);
 				ubicacion_hero = JsonUtility.FromJson<ubicacion>(texto);
-			}
-			if (ubicacion_hero.id != "Server"){
-				if(heros.ContainsKey(ubicacion_hero.id)){
-					heros[ubicacion_hero.id] = ubicacion_hero;
+				if (ubicacion_hero.id != "Server"){
+					if(heros.ContainsKey(ubicacion_hero.id)){
+						heros[ubicacion_hero.id] = ubicacion_hero;
+					}else{
+						heros.Add(ubicacion_hero.id, ubicacion_hero);
+					}
 				}else{
-					heros.Add(ubicacion_hero.id, ubicacion_hero);
+					texto = Encoding.ASCII.GetString(e.RawData);
+					m_server = JsonUtility.FromJson<server>(texto);
+					mensaje_server(m_server);
 				}
-			}else{
-				string texto = Encoding.ASCII.GetString(e.RawData);
-				m_server = JsonUtility.FromJson<server>(texto);
-				mensaje_server(m_server);
 			}
 		};
 
