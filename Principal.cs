@@ -72,7 +72,8 @@ public class Principal : MonoBehaviour {
 					heros.Add(ubicacion_hero.id, ubicacion_hero);
 				}
 			}else{
-				m_server = JsonUtility.FromJson<server>(e.Data);
+				string texto = Encoding.ASCII.GetString(e.RawData);
+				m_server = JsonUtility.FromJson<server>(texto);
 				mensaje_server(m_server);
 			}
 		};
