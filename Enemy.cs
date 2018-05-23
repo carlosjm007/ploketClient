@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
 	public GameObject m_bala;
 	public GameObject indicador_disparo;
 	private const float tiempo_espera_disparo = 2.5f;
+	public bool muerto = false;
 	// Use this for initialization
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
@@ -77,5 +78,9 @@ public class Enemy : MonoBehaviour {
 					360 - Vector3.Angle(Vector2.up, transform.position):
 					Vector3.Angle(Vector2.up, transform.position);
 		transform.eulerAngles = new Vector3(0, 0, angle);
+
+		if(muerto){
+			Destroy(gameObject);
+		}
 	}
 }
