@@ -4,6 +4,7 @@ using UnityEngine;
 using WebSocketSharp;
 using UnityEngine.UI;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 public class Principal : MonoBehaviour {
 	public WebSocket	_websocket;
@@ -25,6 +26,10 @@ public class Principal : MonoBehaviour {
 	public Configuracion dispositivo = new Configuracion();
 	public GameObject m_bala;
 	public disparado info_disparado;
+	private List<string> muertos_enemy = new List<string>();
+	public GameObject resultado_informativo;
+	public Text texto_informativo;
+	private bool gameover = false;
 	// Use this for initialization
 	void Start () {
 		conect_server();
@@ -56,6 +61,21 @@ public class Principal : MonoBehaviour {
 		}else{
 			cuenta_regresiva.enabled = false;
 		}
+		foreach(string id_muerto in muertos_enemy)
+        {
+        	if(instancia_enemy.ContainsKey(id_muerto)){
+				Enemy id_m_enemy = instancia_enemy[id_muerto].GetComponent<Enemy>();
+				id_m_enemy.muerto = true;
+				instancia_enemy.Remove(id_muerto);
+			}
+			if(instancia_enemy.Count == 0){
+				resultado_informativo.SetActive(true);
+			}
+		}
+		if(gameover){
+			resultado_informativo.SetActive(true);
+			texto_informativo.text = "Loser";
+		}
 	}
 
 	private void configure (WebSocket socket)
@@ -66,7 +86,15 @@ public class Principal : MonoBehaviour {
 		socket.OnMessage += (sender, e) => {
 			if (e.IsText) {
 				info_disparado = JsonUtility.FromJson<disparado>(e.Data);
-				Debug.Log(info_disparado.id_disparado);
+				if(info_disparado.id_disparado!=info.id){
+					muertos_enemy.Add(info_disparado.id_disparado);
+				}else{
+					juego_iniciado = false;
+					////////////
+					// Despliega el gameover
+					gameover = true;
+
+				}
 			}else{				
 				string texto = Encoding.ASCII.GetString(e.RawData);
 				ubicacion_hero = JsonUtility.FromJson<ubicacion>(texto);
@@ -101,5 +129,9 @@ public class Principal : MonoBehaviour {
 			juego_iniciado = true;
 			text = start;
 		}
+	}
+
+	public void Play_again(){
+		SceneManager.LoadScene("inicio");
 	}
 }

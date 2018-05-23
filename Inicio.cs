@@ -10,7 +10,9 @@ public class Inicio : MonoBehaviour {
 	public identificacion id = new identificacion();
 	// Use this for initialization
 	void Start () {
-		
+		if(info.nickname != null){
+			nickname.text = info.nickname;
+		}
 	}
 	
 	// Update is called once per frame
